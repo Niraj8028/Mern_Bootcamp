@@ -19,9 +19,9 @@ const userSchema= new schema({
         unique: true,
         trim:true
     },
-    password:{
+    encrypt_password:{
         type:String,
-        trim:true
+        required: true
     },
     salt: String,
     role:{
@@ -33,4 +33,21 @@ const userSchema= new schema({
         default:[]
     }
 })
+userSchema.method={
+    securePassword: function(plain_password){
+        if(!plain_password){
+            return ""
+        }
+        try {
+            return crypto
+            .createHmac("sha256",this.salt)
+            .update(plain_password)
+            .digest("hex")
+            
+        } catch (error) {
+            return "";
+        }
+    }
+}
+
 module.exports=mongoose.model("user",userSchema);
