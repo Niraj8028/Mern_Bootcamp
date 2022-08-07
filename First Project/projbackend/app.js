@@ -1,8 +1,10 @@
+require("dotenv").config();
+
 const mongoose = require('mongoose');
 const express= require("express")
 const app=express();
 
-mongoose.connect('mongodb://localhost:27017/T-shirts', 
+mongoose.connect(process.env.DATABASE, 
     {useNewUrlParser:true,
     useUnifiedTopology:true,
     useCreateIndex: true
