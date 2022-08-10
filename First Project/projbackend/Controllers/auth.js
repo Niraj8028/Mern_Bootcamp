@@ -1,6 +1,10 @@
+const User= require('../Models/user')
+
+
 exports.signup=(req,res)=>{
-    res.json({
-        message:"Singup works"
+    console.log("REQ BODY",req.body);
+    res.send({
+        message:"signup route works"
     })
 }
 

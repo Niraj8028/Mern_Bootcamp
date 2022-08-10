@@ -1,5 +1,5 @@
 const mongoose=require("mongoose");
-const schema=mongoose.schema;
+const schema= mongoose.Schema;
 
 const userSchema= new schema({
     name:{
@@ -50,4 +50,4 @@ userSchema.methods={
     }
 }
 
-module.exports=mongoose.model("user",userSchema);
+module.exports=mongoose.model("User",userSchema);
