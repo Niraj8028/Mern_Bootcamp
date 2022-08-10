@@ -33,7 +33,7 @@ const userSchema= new schema({
         default:[]
     }
 }, {timestamps : true})
-userSchema.method={
+userSchema.methods={
     securePassword: function(plain_password){
         if(!plain_password){
             return ""
