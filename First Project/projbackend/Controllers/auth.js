@@ -63,3 +63,8 @@ exports.signout=(req,res)=>{
         message:"user signout"
     })
 }
+
+exports.isSignedIn=expressJwt({
+    secret:process.env.SECRET,
+    userProperty:"auth"
+})
