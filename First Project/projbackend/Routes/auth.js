@@ -1,9 +1,13 @@
 const express=require('express')
 const router=express.Router();
 const {signout ,signup}= require("../Controllers/auth")
+const {check , validationResult}= require("express-validator")
 
-
-router.post("/signup",signup);
+router.post("/signup",[
+    check("name","name should be atleast 5 characters").isLength({min:5}),
+    check("email", "email is required").isEmail(),
+    check("password","password should be atleast 5 characters").isLength({min:5})
+],signup);
 
 router.get("/signout",signout)
 
