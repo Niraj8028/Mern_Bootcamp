@@ -1,6 +1,36 @@
 const User= require('../Models/user')
 const {check , validationResult}= require("express-validator");
+const errors = require('formidable/FormidableError');
+const jwt=require("jsonwebtoken")
+const expressJwt=require("express-jwt")
 
+exports.signin=(req,res)=>{
+    const{email,password}=req.body()
+
+    if(!errors.isEmpty()){
+        return res.status(422).json({
+            error:errors.array()[0].msg
+        })
+    }
+    User.findOne({email},(err,user)=>{
+        if(err){
+            return res.status(400).json({
+                err:"email does not exists"
+            })
+        }
+        if(user.authenticate(password)){
+            res.status(401).json({
+                error:"email and password does not match"
+            })
+        }
+
+        const token=jwt.sign({_id:user,_id},process.env.SECRET)
+        res.cookie("token",token,{expire: new Date()+9999})
+
+        const{_id, name, email,role}=user;
+        return res.json({token,user: {_id,name,email,role}})
+    })
+}
 
 exports.signup=(req,res)=>{
 
