@@ -2,9 +2,14 @@ const User= require('../Models/user')
 
 
 exports.signup=(req,res)=>{
-    console.log("REQ BODY",req.body);
-    res.send({
-        message:"signup route works"
+    const user= new User(req.body);
+    user.save((err,user)=>{
+        if(err){
+            return res.status(400).json({
+                err:"unable to save the user in database"
+            })
+        }
+        res.json(user)
     })
 }
 

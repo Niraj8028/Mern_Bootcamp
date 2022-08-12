@@ -1,5 +1,6 @@
 const mongoose=require("mongoose");
 const schema= mongoose.Schema;
+const uuidv1 = require("uuid/v1");
 
 const userSchema= new schema({
     name:{
@@ -33,6 +34,20 @@ const userSchema= new schema({
         default:[]
     }
 }, {timestamps : true})
+
+
+userSchema
+  .virtual("password")
+  .set(function(password) {
+    this._password = password;
+    this.salt = uuidv1();
+    this.encry_password = this.securePassword(password);
+  })
+  .get(function() {
+    return this._password;
+  });
+
+
 userSchema.methods={
     securePassword: function(plain_password){
         if(!plain_password){
