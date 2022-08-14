@@ -5,7 +5,7 @@ const {isSignedIn , isAdmin , isAuthenticated}=require("../Controllers/auth")
 
 router.param("userId",getUserById)
 
-router.get("/user/userId",isSignedIn,isAuthenticated,getUser)
+router.get("/user/:userId",isSignedIn,isAuthenticated,getUser)
 
 
 module.exports=router;

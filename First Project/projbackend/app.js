@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 app.use("/api",authRoutes);
+app.use("/api",userRoutes);
 
 const port=8000;
 
