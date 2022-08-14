@@ -11,7 +11,8 @@ const authRoutes=require('./Routes/auth')
 const userRoutes=require('./Routes/user')
 
 mongoose.connect(process.env.DATABASE, 
-    {useNewUrlParser:true,
+    {
+    useNewUrlParser:true,
     useUnifiedTopology:true,
     useCreateIndex: true
 }).then(()=>{

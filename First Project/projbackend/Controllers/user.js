@@ -7,10 +7,13 @@ exports.getUserById=(req,res,next,id)=>{
                 error:"user was not found in database"
             })
         }
-        const profile=user
+        req.profile=user
         next();
     })
 }
-exports.getUser=(req,res)=>{    
+exports.getUser=(req,res)=>{   
+    req.profile.salt=undefined;
+    req.profile.encrypt_password=undefined;
+    
     res.json(req.profile)
 }

@@ -15,13 +15,19 @@ exports.signup=(req,res)=>{
             error:errors.array()[0].msg
         })
     }
+
+
+
     const user= new User(req.body);
+    console.log("REQ BODY IS",  req.body);
     user.save((err,user)=>{
         if(err){
+            console.log("ERROR IS ",err);
             return res.status(400).json({
                 err:"unable to save the user in database"
             })
         }
+
         res.json({
             name: user.name,
             email: user.email,
@@ -29,6 +35,7 @@ exports.signup=(req,res)=>{
           });
     })
 }
+
 exports.signin=(req,res)=>{
     const{email,password}=req.body;
     const errors=validationResult(req)
@@ -70,7 +77,7 @@ exports.isSignedIn=expressJwt({
 })
 
 exports.isAuthenticated=(req,res,next)=>{
-    let checker= req.profile && req.auth && req.auth._id===req.profile._id
+    let checker= req.profile && req.auth && req.auth._id==req.profile._id
     if(!checker){
         return res.status(403).json({
             error:"Access Denied"
