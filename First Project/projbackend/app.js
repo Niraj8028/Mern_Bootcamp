@@ -9,6 +9,7 @@ const cors=require('cors')
 
 const authRoutes=require('./Routes/auth')
 const userRoutes=require('./Routes/user')
+const categoryRoutes=require('./Routes/category')
 
 mongoose.connect(process.env.DATABASE, 
     {
