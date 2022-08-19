@@ -77,10 +77,10 @@ exports.pushOrderInPurchaseList=(req,res,next)=>{
             transaction_id:req.body.order.transaction_id
         })
     })
-}
 
-User.findByIdAndUpdate(
-    {id:req.profile._id},
+
+User.findByIdAndUpdate=(
+    {_id:req.profile._id},
     {$push: {purchases:purchases}},
     {new:true},
     (err,purchases)=>{
@@ -94,3 +94,4 @@ User.findByIdAndUpdate(
     
     
     )
+}

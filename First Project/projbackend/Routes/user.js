@@ -1,6 +1,6 @@
 const express= require("express");
 const router=express.Router();
-const { getUserById, getUser, updateUser } = require("../Controllers/user");
+const { getUserById, getUser, updateUser,userPurchaseList} = require("../Controllers/user");
 const {isSignedIn , isAdmin , isAuthenticated}=require("../Controllers/auth")
 
 router.param("userId",getUserById)
@@ -10,4 +10,4 @@ router.put("/user/:userId",isSignedIn,isAuthenticated,updateUser)
 router.get("/user/orders/:userId",isSignedIn,isAuthenticated,userPurchaseList)
 
 
-module.exports=router;
+module.exports=router; 
