@@ -20,6 +20,21 @@ exports.createCategory=(req,res)=>{
                 error:"unable to create category"
             })
         }
-        res.json(category)
+        res.json(category);
+    })
+}
+
+exports.getCategory=(req,res)=>{
+    return res.json(req.category);
+}
+
+exports.getAllCategories=(req,res)=>{
+    Category.find().exec=((err,items)=>{
+        if(err){
+            return res.json({
+                error:"No categories found in database"
+            })
+        }
+        res.json(items);
     })
 }
