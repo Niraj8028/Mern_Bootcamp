@@ -5,24 +5,24 @@ exports.getCategoryById=(req,res,next,id)=>{
         if(err){
             return res.status(400).json({
                 error:"unable to find category in database"
-            })
-        }
+            });
+        };
         req.Category=cate;
         next();
-    })
-}
+    });
+};
 
 exports.createCategory=(req,res)=>{
     const category= new Category(req.body);
-    category.save((err,category)=>{
+    category.save((err,cat)=>{
         if(err){
             return res.status(400).json({
                 error:"unable to create category"
-            })
-        }
-        res.json(category);
-    })
-}
+            });
+        };
+        res.json({cat});
+    });
+};
 
 exports.getCategory=(req,res)=>{
     return res.json(req.category);
@@ -33,11 +33,11 @@ exports.getAllCategories=(req,res)=>{
         if(err){
             return res.json({
                 error:"No categories found in database"
-            })
-        }
+            });
+        };
         res.json(items);
-    })
-}
+    });
+};
 
 
 exports.updateCategory=(req,res)=>{
@@ -48,11 +48,11 @@ exports.updateCategory=(req,res)=>{
         if(err){
             return res.status(400).json({
                 error:"unable to update category"
-            })
-        }
+            });
+        };
         res.json(updatedCate)
-    })
-}
+    });
+};
 
 exports.removeCategory=(req,res)=>{
     const category=req.category;
@@ -60,10 +60,10 @@ exports.removeCategory=(req,res)=>{
         if(err){
             return res.status(400).json({
                 error:"unable to update category"
-            })
-        }
+            });
+        };
         res.json({
             message:`${category.name} Category was deleted succesfully`
-        })
-    })
-}
+        });
+    });
+};

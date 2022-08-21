@@ -24,6 +24,7 @@ app.use(cookieParser());
 app.use(cors());
 app.use("/api",authRoutes);
 app.use("/api",userRoutes);
+app.use("/api",categoryRoutes);
 
 const port=8000;
 

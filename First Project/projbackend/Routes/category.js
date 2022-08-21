@@ -1,7 +1,12 @@
-const express=require("express")
+const express= require('express')
 const router=express.Router();
 
-const {getCategoryById, createCategory, getCategory, getAllCategories, updateCategory}=require('../Controllers/category')
+const {getCategoryById, 
+    createCategory, 
+     getCategory, 
+    getAllCategories, 
+    updateCategory}=require('../Controllers/category')
+
 const {getUserById}=require('../Controllers/user')
 const {isAuthenticated,isSignedIn,isAdmin}=require('../Controllers/auth')
 
