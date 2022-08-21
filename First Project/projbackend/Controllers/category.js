@@ -25,11 +25,11 @@ exports.createCategory=(req,res)=>{
 };
 
 exports.getCategory=(req,res)=>{
-    return res.json(req.category);
+    return res.json(req.Category);
 }
 
 exports.getAllCategories=(req,res)=>{
-    Category.find().exec=((err,items)=>{
+    Category.find().exec=((err,items)=>{1
         if(err){
             return res.json({
                 error:"No categories found in database"
@@ -41,7 +41,7 @@ exports.getAllCategories=(req,res)=>{
 
 
 exports.updateCategory=(req,res)=>{
-    const category=req.category;
+    const category=req.Category;
     category.name=req.body.name;
 
     category.save((err,updatedCate)=>{
@@ -55,7 +55,7 @@ exports.updateCategory=(req,res)=>{
 };
 
 exports.removeCategory=(req,res)=>{
-    const category=req.category;
+    const category=req.Category;
     category.remove((err,category)=>{
         if(err){
             return res.status(400).json({

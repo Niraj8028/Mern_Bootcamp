@@ -5,7 +5,8 @@ const {getCategoryById,
     createCategory, 
      getCategory, 
     getAllCategories, 
-    updateCategory}=require('../Controllers/category')
+    updateCategory,
+removeCategory}=require('../Controllers/category')
 
 const {getUserById}=require('../Controllers/user')
 const {isAuthenticated,isSignedIn,isAdmin}=require('../Controllers/auth')
@@ -19,6 +20,7 @@ router.get("/category/:categoryId",getCategory)
 router.get("/category/categories",getAllCategories)
 
 router.put("/category/:categoryId/:userId",isSignedIn,isAuthenticated,isAdmin,updateCategory)
+router.delete("/category/:categoryId/:userId",isSignedIn,isAuthenticated,isAdmin,removeCategory);
 
 
 module.exports=router;
