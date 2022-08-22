@@ -21,7 +21,7 @@ exports.getProductById=(req,res,next,id)=>{
 exports.createProduct=(req,res)=>{
     let form=new formidable.IncomingForm();
 
-    form.keepExtensions=true;
+    form.keepExtensions = true;
 
     form.parse(req,(err,fields,file)=>{
         if(err){
@@ -34,21 +34,21 @@ exports.createProduct=(req,res)=>{
 
         if(!name || ! description || !price || !category || !stock){
             return res.status(400).json({
-                error:"Please mention all fields"
+                error:"Please mention all required fields"
             })
         }
 
-        const product= new Product(fields);
+        let product= new Product(fields);
 
-        if(file.photo){
-            if(file.photo.size > 3000000){
-                return res.status(400).json({
-                    error:"file size is too large"
-                })
+        if (file.photo) {
+            if (file.photo.size > 3000000) {
+              return res.status(400).json({
+                error: "file size must be less than 3 MB",
+              });
             }
-            product.photo.data=fs.readFileSync(file.photo.path)
-            product.photo.contentType= file.photo.type;
-        }
+            product.photo.data = fs.readFileSync(file.photo.path);
+            product.photo.contentType = file.photo.type;
+          }
 
         product.save((err,product)=>{
             if(err){
@@ -57,7 +57,9 @@ exports.createProduct=(req,res)=>{
                 })
             }
             res.json({product})
+            console.log(product)
         })
+        
 
 
     })

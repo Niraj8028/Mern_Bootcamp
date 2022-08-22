@@ -26,10 +26,10 @@ const productSchema= new mongoose.Schema({
         required: true
     },
     stock:{
-        type: number
+        type: Number
     },
     sold: {
-        type: number,
+        type: Number,
         default: 0
     },
     photo:{
@@ -38,4 +38,4 @@ const productSchema= new mongoose.Schema({
     }
 }, {timestamps: true})
 
-module.export= mongoose.model("product", productSchema);
+module.exports= mongoose.model("product", productSchema);
