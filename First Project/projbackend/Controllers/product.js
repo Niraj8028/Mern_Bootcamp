@@ -30,6 +30,14 @@ exports.createProduct=(req,res)=>{
             })
         }
 
+        const {name,description,price,category,stock} =fields;
+
+        if(!name || ! description || !price || !category || !stock){
+            return res.status(400).json({
+                error:"Please mention all fields"
+            })
+        }
+
         const product= new Product(fields);
 
         if(file.photo){
