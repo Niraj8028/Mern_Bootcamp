@@ -2,6 +2,7 @@ const Product=require("../Models/product")
 const formidable=require('formidable')
 const _=require("lodash")
 const fs=require("fs")
+const category = require("../Models/category")
 
 exports.getProductById=(req,res,next,id)=>{
     Product.findById(id)
@@ -124,5 +125,24 @@ exports.updateProduct=(req,res)=>{
             res.json({product})
             console.log(product)
         })
+    })
+}
+
+exports.getAllProducts=(req,res)=>{
+    let limit= req.query.limit? parseInt(req.query.limit): 8;
+    let sortBy=req.query.sortBy ? req.query.sortBy : "_id";
+
+    Product.find()
+    .select("-photo")
+    .populate("category")
+    .sort([[sortBy,"asc"]])
+    .limit(limit)    
+    .exec((err,products)=>{
+        if(err){
+            res.status(400).json({
+                error:"No product was found"
+            })
+        }
+        res.json(products)
     })
 }
