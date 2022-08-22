@@ -5,7 +5,7 @@ const router=express.Router();
 const { isSignedIn, isAuthenticated, isAdmin }=require('../Controllers/auth')
 const { getUserById }=require('../Controllers/user')
 const {}=require('../Controllers/category')
-const {getProductById,createProduct}=require('../Controllers/product')
+const {getProductById,createProduct, removeProduct}=require('../Controllers/product')
 
 
 router.param("productId",getProductById);
@@ -16,4 +16,6 @@ router.post("/product/create/:userId",isSignedIn,isAuthenticated,isAdmin,createP
 router.get("/product/create/", (req,res)=>{
     res.send("inside crete")
 })
+router.delete("product/:productId",isSignedIn,isAuthenticated,isAdmin,removeProduct);
+
 module.exports=router;

@@ -90,3 +90,39 @@ exports.removeProduct=(req,res)=>{
         })
     })
 }
+
+exports.updateProduct=(req,res)=>{
+    let form=new formidable.IncomingForm();
+
+    form.keepExtensions = true;
+
+    form.parse(req,(err,fields,file)=>{
+        if(err){
+            return res.status(400).json({
+                error:"There is some error in file"
+            })
+        }
+        let product=req.product;
+        product=_.extend(product,fields)
+
+        if (file.photo) {
+            if (file.photo.size > 3000000) {
+              return res.status(400).json({
+                error: "file size must be less than 3 MB",
+              });
+            }
+            product.photo.data = fs.readFileSync(file.photo.path);
+            product.photo.contentType = file.photo.type;
+          }
+
+        product.save((err,product)=>{
+            if(err){
+                return res.status(400).json({
+                    error:"updating Product in database failed"
+                })
+            }
+            res.json({product})
+            console.log(product)
+        })
+    })
+}
