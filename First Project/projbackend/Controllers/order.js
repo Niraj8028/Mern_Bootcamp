@@ -14,3 +14,15 @@ exports.getOrderById=(req,res,next,id)=>{
         next();
     })
 }
+exports.createOrder=(req,res)=>{
+    req.body.order.user=req.profile;
+    const order=req.body.order;
+    Order.save(order).exec((err,order)=>{
+        if(err){
+            return res.status(400).json({
+                error:"unable to save order"
+            })
+        }
+        res.json(order);
+    })
+}
