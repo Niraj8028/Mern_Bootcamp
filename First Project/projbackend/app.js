@@ -31,7 +31,7 @@ app.use("/api",productRoutes);
 app.use("/api",orderRoutes);
 
 
-const port=8000;
+const port=7000;
 
 app.listen(port,()=>{
     console.log(`app is running at ${port} `)
