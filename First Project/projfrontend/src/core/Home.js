@@ -1,13 +1,23 @@
 import React from "react";
 import { API } from "../Backend";
 import "../styles.css"
+import Base from "./Base";
+
 
 function Home() {
   console.log("the API is:", API)
   return (
-    <div className="text-white">
-      Home Page dsad sad {API}
-    </div>
+    <Base>
+      <div className="row ">
+        <div className="col-4">
+        <button className="btn btn-success">Click here</button></div>
+        <div className="col-4">
+        <button className="btn btn-success">Click here</button></div>
+        <div className="col-4">
+        <button className="btn btn-success">Click here</button></div>
+        
+      </div>
+    </Base>
   )
 }
 
