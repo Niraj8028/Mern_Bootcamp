@@ -25,12 +25,12 @@ function Navbar() {
                 </Link>
             </li> 
             <li className="nav-item">
-                <Link style={  currentTab("/abc")} className='nav-link' to="/abc">
+                <Link style={  currentTab("/")} className='nav-link' to="">
                     Cart
                 </Link>
             </li> 
             <li style={currentTab("/signout")} className="nav-item">
-                <Link className='nav-link' to="/signout">
+                <Link className='nav-link' to="/">
                     Dashboard
                 </Link>
             </li> 
@@ -39,8 +39,8 @@ function Navbar() {
                     Admin Dashboard
                 </Link>
             </li> 
-            <li style={currentTab("/")} className="nav-item">
-                <Link className='nav-link' to="/">
+            <li style={currentTab("/signup")} className="nav-item">
+                <Link className='nav-link' to="/signup">
                     Signup
                 </Link>
             </li> 

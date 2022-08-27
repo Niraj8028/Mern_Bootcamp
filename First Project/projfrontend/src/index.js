@@ -9,8 +9,9 @@ import {
   Route,
 } from "react-router-dom";
 import Home from './core/Home';
+import Signup from './user/Signup';
 
-import ABC from './core/ABC';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -20,7 +21,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/abc" element={<ABC/>}/>
+        <Route path="/signup" element={<Signup/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
