@@ -44,8 +44,8 @@ function Navbar() {
                     Signup
                 </Link>
             </li> 
-            <li style={currentTab("/")} className="nav-item">
-                <Link className='nav-link' to="/">
+            <li style={currentTab("/signin")} className="nav-item">
+                <Link className='nav-link' to="/signin">
                     Signin
                 </Link>
             </li> 
