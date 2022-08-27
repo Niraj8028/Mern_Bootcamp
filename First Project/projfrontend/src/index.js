@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import Home from './core/Home';
 
-
+import ABC from './core/ABC';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -20,7 +20,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/contact" element={<div>contact</div>}/>
+        <Route path="/abc" element={<ABC/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
