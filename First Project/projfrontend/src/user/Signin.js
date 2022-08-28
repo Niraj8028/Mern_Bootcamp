@@ -6,10 +6,7 @@ const signInForm=()=>{
     <div className='row'>
       <div className="col-md-6 offset-sm-3 text-left">
         <form>
-          <div className='form-group'>
-            <label className='text-light'>Name</label>
-            <input className='form-control' type="text"/>
-          </div>
+          
           <div className='form-group'>
             <label className='text-light'>Email</label>
             <input className='form-control' type="email"/>
@@ -18,7 +15,7 @@ const signInForm=()=>{
             <label className='text-light'>Password</label>
             <input className='form-control' type="password"/>
           </div>
-          <button className='btn btn-success btn-block '>Submit</button>
+          <button className='mt-4 btn btn-success btn-block '>Submit</button>
         </form>
 
       </div>
