@@ -56,10 +56,35 @@ const Signup=()=>{
       </div>
     )
   } 
+  const successMsg=()=>{
+    return(
+      <div className='row'>
+        <div className='col-md-6 offset-sm-3 text-left'>
+          <div className='alert alert-success' style={{display:success?"":"none"}}>
+            New account was created successfully.
+          </div>
+        </div>
+      </div>
+    )
+  }
+  const errorMsg=()=>{
+    return(
+      <div className='row'>
+        <div className='col-md-6 offset-sm-3 text-left'>
+      <div className='alert alert-danger' style={{display:error?"":"none"}}>  
+        {error}
+      </div>
+      </div>
+      </div>
+    )
+  }
 
   return (
     <Base title='A signout Page' description='A page for user signup'>
+        {successMsg()}
+        {errorMsg()}
         {signupForm()}
+        <p className='text-white text-center'>{JSON.stringify(values)}</p>
     </Base>
   );
   };
