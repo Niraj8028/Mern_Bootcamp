@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { signin,authenticate } from '../auth/helper'
+import { signin,authenticate, isAuthenticated } from '../auth/helper'
+import {Navigate} from "react-router-dom"
 
 import Base from '../core/Base'
 
@@ -14,6 +15,7 @@ const Signin=()=> {
     didRedirect:false
   })
   const {email,password,error,loading,didRedirect}=values;
+  const user=isAuthenticated();
 
   const handleChange=(name)=>event=>{
     setValues({...values, error:false, [name]:event.target.value})
@@ -25,7 +27,7 @@ const Signin=()=> {
     signin({email,password})
     .then(data=>{
       if(data.error){
-        setValues({...values,error:true,loading:false})
+        setValues({...values,error:data.error,loading:false})
       }
       else{
         authenticate(data,()=>{
@@ -38,17 +40,11 @@ const Signin=()=> {
 
   }
 
-  const successMsg=()=>{
+  const loadingMsg=()=>{
     return(
-      <div className='row'>
-        <div className='col-md-6 offset-sm-3 text-left'>
-          <div className='alert alert-success' style={{display:success?"":"none"}}>
-            New account was created successfully.
-          </div>
-        </div>
-      </div>
-    )
+    loading && (<div className='alert alert-info'><h6>loading....</h6></div>))
   }
+
   const errorMsg=()=>{
     return(
       <div className='row'>
@@ -61,28 +57,67 @@ const Signin=()=> {
     )
   }
 
-  const signInForm=()=>{
-  return(
-    <div className='row'>
-      <div className="col-md-6 offset-sm-3 text-left">
-        <form>
-          
-          <div className='form-group'>
-            <label className='text-light'>Email</label>
-            <input className='form-control' onChange={handleChange("email")} value={"email"} type="email"/>
-          </div> 
-          <div className='form-group'>
-            <label className='text-light'>Password</label>
-            <input className='form-control' onChange={handleChange("password")} value={"password"} type="password"/>
-          </div>
-          <button className='mt-4 btn btn-success btn-block' onClick={handleSubmit}>Submit</button>
-        </form>
+  const performRedirect=()=>{
+    if(didRedirect){
+      if(user && user.role===1){
+        return <p>Redirect to admin dashboard</p>
+      }
+      else{
+        return <p>redirect to user dashboard</p>
+      }
 
+    }
+    if(isAuthenticated()){
+      return <Navigate to="/" />
+    }
+  }
+
+  const signInForm=()=>{
+    return (
+      <div className="row">
+        <div className="col-md-6 offset-sm-3 text-left">
+          <form>
+            <div className="form-group">
+              <label className="text-light">Email</label>
+              <input
+                onChange={handleChange("email")}
+                value={email}
+                className="form-control"
+                type="email"
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="text-light">Password</label>
+              <input
+                onChange={handleChange("password")}
+                value={password}
+                className="form-control"
+                type="password"
+              />
+            </div>
+            <div class="d-grid gap-2">
+                  <button onClick={handleSubmit} className="btn btn-success btn-block mt-3">
+                    Submit
+                   
+                  </button>
+                  </div>
+          </form>
+        </div>
       </div>
-    </div>
-  )
+    );
 
   }
+  return (
+    <Base title="Sign In page" description="A page for user to sign in!">
+      {loadingMsg()}
+      {errorMsg()}
+      {signInForm()}
+      {performRedirect()}
+      
+      <p className="text-white text-center">{JSON.stringify(values)}</p>
+    </Base>
+  );
   
 }
 
