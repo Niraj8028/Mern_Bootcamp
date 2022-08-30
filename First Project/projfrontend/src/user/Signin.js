@@ -15,10 +15,10 @@ const Signin=()=> {
     didRedirect:false
   })
   const {email,password,error,loading,didRedirect}=values;
-  const user=isAuthenticated();
+  // const user=isAuthenticated();
 
   const handleChange=(name)=>event=>{
-    setValues({...values, error:false, [name]:event.target.value})
+    setValues({...values, error:false,loading:false, [name]:event.target.value})
   }
 
   const handleSubmit=event=>{
@@ -26,12 +26,12 @@ const Signin=()=> {
     setValues({...values,error:false,loading:true})
     signin({email,password})
     .then(data=>{
-      if(data.error){
+      if(data?.error){
         setValues({...values,error:data.error,loading:false})
       }
       else{
         authenticate(data,()=>{
-          setValues({...values,didRedirect:true})
+          setValues({...values,didRedirect:true,loading:false})
         })
 
       }
@@ -57,20 +57,20 @@ const Signin=()=> {
     )
   }
 
-  const performRedirect=()=>{
-    if(didRedirect){
-      if(user && user.role===1){
-        return <p>Redirect to admin dashboard</p>
-      }
-      else{
-        return <p>redirect to user dashboard</p>
-      }
+  // const performRedirect=()=>{
+  //   if(didRedirect){
+  //     if(user && user.role===1){
+  //       return <p>Redirect to admin dashboard</p>
+  //     }
+  //     else{
+  //       return <p>redirect to user dashboard</p>
+  //     }
 
-    }
-    if(isAuthenticated()){
-      return <Navigate to="/" />
-    }
-  }
+  //   }
+  //   if(isAuthenticated()){
+  //     return <Navigate to="/" />
+  //   }
+  // }
 
   const signInForm=()=>{
     return (
@@ -113,7 +113,7 @@ const Signin=()=> {
       {loadingMsg()}
       {errorMsg()}
       {signInForm()}
-      {performRedirect()}
+      
       
       <p className="text-white text-center">{JSON.stringify(values)}</p>
     </Base>
