@@ -1,6 +1,6 @@
 import React from 'react'
-import {Link} from "react-router-dom";
-
+import {Link, Navigate} from "react-router-dom";
+import { isAuthenticated, signout } from '../auth/helper';
 
 
 const currentTab=(path)=>{
@@ -49,11 +49,18 @@ function Navbar() {
                     Signin
                 </Link>
             </li> 
-            <li style={currentTab("/")} className= "nav-item">
-                <Link className='nav-link' to="/">
-                    Logout
-                </Link>
-            </li> 
+            
+            {isAuthenticated() && (
+                <li className='nav-item'><span className='nav-link text-danger'
+                 onClick={()=>{
+                    signout(()=>{
+                        <Navigate to="/" />
+                    })
+                 }}>Logout</span>
+                </li>
+            )}
+            
+            
         </ul>
       
     </div>
