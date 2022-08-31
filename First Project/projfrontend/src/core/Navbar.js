@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import {Link, Navigate, useNavigate} from "react-router-dom";
 import { isAuthenticated, signout } from '../auth/helper';
 
@@ -40,16 +40,19 @@ function Navbar() {
                     Admin Dashboard
                 </Link>
             </li> 
-            <li style={currentTab("/signup")} className="nav-item">
-                <Link className='nav-link' to="/signup">
-                    Signup
-                </Link>
-            </li> 
-            <li style={currentTab("/signin")} className="nav-item">
-                <Link className='nav-link' to="/signin">
-                    Signin
-                </Link>
-            </li> 
+
+            {!isAuthenticated() && (<Fragment>
+                <li style={currentTab("/signup")} className="nav-item">
+                    <Link className='nav-link' to="/signup">
+                        Signup
+                    </Link>
+                </li> 
+                <li style={currentTab("/signin")} className="nav-item">
+                    <Link className='nav-link' to="/signin">
+                        Signin
+                    </Link>
+                </li> 
+            </Fragment>)}
             
             {isAuthenticated() && (
                 <li className='nav-item'><span className='nav-link text-danger'
