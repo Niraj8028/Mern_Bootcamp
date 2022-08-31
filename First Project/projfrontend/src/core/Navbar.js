@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 import { isAuthenticated, signout } from '../auth/helper';
 
 
@@ -16,6 +16,7 @@ const currentTab=(path)=>{
 
 function Navbar() {
     // console.log("histort is:",history);
+    let navigate = useNavigate();
   return (
     <div>
         <ul className='nav nav-tabs bg-dark'>
@@ -54,7 +55,7 @@ function Navbar() {
                 <li className='nav-item'><span className='nav-link text-danger'
                  onClick={()=>{
                     signout(()=>{
-                        <Navigate to="/" />
+                        navigate("/");
                     })
                  }}>Logout</span>
                 </li>

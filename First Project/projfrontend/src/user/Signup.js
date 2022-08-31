@@ -21,7 +21,7 @@ const Signup=()=>{
     setValues({...values, error:false})
     signup({name,email,password})
     .then(data=>{
-      if(data.error){
+      if(data?.error){
         setValues({...values,error:data.error,success:false})
       }
       else{

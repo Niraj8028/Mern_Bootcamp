@@ -8,14 +8,14 @@ import Base from '../core/Base'
 const Signin=()=> {
 
   const[values,setValues]=useState({
-    email:"",
-    password:"",
+    email:"1@gmail.com",
+    password:"newuser3",
     error:"",
     loading:false,
     didRedirect:false
   })
   const {email,password,error,loading,didRedirect}=values;
-  // const user=isAuthenticated();
+  const user=isAuthenticated();
 
   const handleChange=(name)=>event=>{
     setValues({...values, error:false,loading:false, [name]:event.target.value})
@@ -36,7 +36,7 @@ const Signin=()=> {
 
       }
     })
-    .catch(console.log("signIn request failed"));
+    .catch(err=> console.log(err))
 
   }
 
@@ -57,20 +57,20 @@ const Signin=()=> {
     )
   }
 
-  // const performRedirect=()=>{
-  //   if(didRedirect){
-  //     if(user && user.role===1){
-  //       return <p>Redirect to admin dashboard</p>
-  //     }
-  //     else{
-  //       return <p>redirect to user dashboard</p>
-  //     }
+  const performRedirect=()=>{
+    if(didRedirect){
+      if(user && user.role===1){
+        return <p>Redirect to admin dashboard</p>
+      }
+      else{
+        return <p>redirect to user dashboard</p>
+      }
 
-  //   }
-  //   if(isAuthenticated()){
-  //     return <Navigate to="/" />
-  //   }
-  // }
+    }
+    if(isAuthenticated()){
+      return <Navigate to="/" />
+    }
+  }
 
   const signInForm=()=>{
     return (
@@ -113,7 +113,7 @@ const Signin=()=> {
       {loadingMsg()}
       {errorMsg()}
       {signInForm()}
-      
+      {performRedirect()}
       
       <p className="text-white text-center">{JSON.stringify(values)}</p>
     </Base>
