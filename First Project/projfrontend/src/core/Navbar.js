@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Link,  useNavigate} from "react-router-dom";
 import { isAuthenticated, signout } from '../auth/helper';
 
 
@@ -31,12 +31,12 @@ function Navbar() {
                 </Link>
             </li> 
             <li style={currentTab("/signout")} className="nav-item">
-                <Link className='nav-link' to="/">
+                <Link className='nav-link' to="/user/dashboard">
                     Dashboard
                 </Link>
             </li> 
             <li style={currentTab("/")} className="nav-item">
-                <Link className='nav-link' to="/">
+                <Link className='nav-link' to="/admin/dashboard">
                     Admin Dashboard
                 </Link>
             </li> 

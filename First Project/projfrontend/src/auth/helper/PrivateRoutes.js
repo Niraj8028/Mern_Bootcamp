@@ -1,13 +1,12 @@
 import React from "react";
-import { Route ,} from "react-router-dom";
+import { Route, Navigate, Outlet} from "react-router-dom";
 import { isAuthenticated } from "./index";
+import Signin from "../../user/Signin";
 
 
-const PrivateRoute = ({ component: Component, ...props }) => {   
-    if (!Component) return null;
-  
-    return isAuthenticated()
-      ? <Component {...props}/>
-      : <Navigate to="/signin" /> }
+const PrivateRoute=()=>{
+  const isAuth=isAuthenticated();
+  return isAuth?<Outlet/> : <Navigate to="/signin" />
+}
   
   export default PrivateRoute;
