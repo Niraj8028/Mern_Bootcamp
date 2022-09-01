@@ -11,7 +11,9 @@ import {
 import Home from './core/Home';
 import Signup from './user/Signup';
 import Signin from './user/Signin';
-
+import PrivateRoute from './auth/helper/PrivateRoutes';
+import UserDashBoard from './user/UserDashBoard';
+import AdminDashBoard from './user/AdminDashBoard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -24,6 +26,8 @@ root.render(
         <Route path="/" element={<Home/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/signin" element={<Signin/>}/>
+        <PrivateRoute path="/user/dashboard" element={<UserDashBoard/>}/>
+        <adminRoute path="/admin/dashboard" element={<AdminDashBoard/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

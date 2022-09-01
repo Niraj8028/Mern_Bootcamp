@@ -7,7 +7,7 @@ const adminRoute = ({ component: Component, ...props }) => {
     if (!Component) return null;
   
     return isAuthenticated() && isAuthenticated().user.role===1
-      ? <Component />
+      ? <Component {...props} />
       : <Navigate to="/signin" /> }
   
   export default adminRoute;

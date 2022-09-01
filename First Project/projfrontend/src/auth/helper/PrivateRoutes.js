@@ -7,7 +7,7 @@ const PrivateRoute = ({ component: Component, ...props }) => {
     if (!Component) return null;
   
     return isAuthenticated()
-      ? <Component />
+      ? <Component {...props}/>
       : <Navigate to="/signin" /> }
   
   export default PrivateRoute;
