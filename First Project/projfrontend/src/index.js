@@ -30,7 +30,7 @@ root.render(
         <Route element={<PrivateRoute/>}>
           <Route path="/user/dashboard" element={<UserDashBoard/>}/>
         </Route>
-        <Route element={<AdminRoutes/>}>
+         <Route element={<AdminRoutes/>}>
           <Route path="/admin/dashboard" element={<AdminDashBoard/>}/>
         </Route>
         
