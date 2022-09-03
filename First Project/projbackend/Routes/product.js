@@ -16,7 +16,7 @@ router.post("/product/create/:userId",isSignedIn,isAuthenticated,isAdmin,createP
 router.get("/product/create/", (req,res)=>{
     res.send("inside crete")
 })
-router.delete("product/:productId",isSignedIn,isAuthenticated,isAdmin,removeProduct);
+router.delete("product/:productId/:userId",isSignedIn,isAuthenticated,isAdmin,removeProduct);
 
 router.put("product/:productId",isSignedIn,isAuthenticated,isAdmin,updateProduct);
 router.get("products",getAllProducts)
