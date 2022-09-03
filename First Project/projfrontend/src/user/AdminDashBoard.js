@@ -13,16 +13,16 @@ function AdminDashBoard() {
         <h4 className='card-header bg-dark text-white'>Admin Navigation</h4>
         <ul className='list-group'>
           <li className='list-group-item'>
-            <Link to="/create/category" className='nav-link text-success ' >Create Categories</Link>
+            <Link to="/admin/create/category" className='nav-link text-success ' >Create Categories</Link>
           </li>
           <li className='list-group-item'>
-            <Link to="/create/product" className='nav-link text-success ' >Create Product</Link>
+            <Link to="/admin/create/product" className='nav-link text-success ' >Create Product</Link>
           </li>
           <li className='list-group-item'>
-            <Link to="/category" className='nav-link text-success ' >Manage Product</Link>
+            <Link to="/admin/category" className='nav-link text-success ' >Manage Product</Link>
           </li>
           <li className='list-group-item'>
-            <Link to="/orders" className='nav-link text-success ' >Manage orders</Link>
+            <Link to="/admin/orders" className='nav-link text-success ' >Manage orders</Link>
           </li>
         </ul>
       </div>
