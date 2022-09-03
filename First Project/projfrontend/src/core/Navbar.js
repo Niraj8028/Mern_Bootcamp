@@ -30,16 +30,22 @@ function Navbar() {
                     Cart
                 </Link>
             </li> 
-            <li style={currentTab("/signout")} className="nav-item">
+            {isAuthenticated() && isAuthenticated().user.role=== 0 && (
+                <li style={currentTab("/signout")} className="nav-item">
                 <Link className='nav-link' to="/user/dashboard">
                     Dashboard
                 </Link>
-            </li> 
-            <li style={currentTab("/")} className="nav-item">
+            </li>
+            )}
+            {isAuthenticated() && isAuthenticated().user.role===1 && (
+                <li style={currentTab("/")} className="nav-item">
                 <Link className='nav-link' to="/admin/dashboard">
                     Admin Dashboard
                 </Link>
-            </li> 
+            </li>
+            )}    
+             
+             
 
             {!isAuthenticated() && (<Fragment>
                 <li style={currentTab("/signup")} className="nav-item">
