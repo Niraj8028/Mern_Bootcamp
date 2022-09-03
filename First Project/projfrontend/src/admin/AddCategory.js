@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { isAuthenticated } from '../auth/helper';
 import Base from '../core/Base'
+import { createCategory } from './helper/adminapicall';
 
 function AddCategory() {
     const[name,setName]=useState("");
@@ -9,24 +10,52 @@ function AddCategory() {
     const[success,setSuccess]=useState(false);
 
     const {user,token}=isAuthenticated();
-
+    // console.log("token is:" ,token);
+    // console.log("id is:" ,user._id);
+    // console.log("token is:" ,user.name);
     const goBack=()=>{
         return(
             <div className='mt-3'>
-                <Link to="/admin/dashboard" className='btn btn-sm btn-info mb-3'>Go back</Link>
+                <Link to="/admin/dashboard" className='btn btn-sm btn-secondary mb-3'>Go back</Link>
             </div>
         )
+    }
+
+    const handleChange=(event)=>{
+        setError("");
+        setName(event.target.value)
+    }
+    const handleClick=event=>{
+        event.preventDefault();
+        setError("")
+        setSuccess(false)
+
+        createCategory(user._id,token, {name})
+            .then(data=>{
+                if(data.error){
+                    
+                    setError(true)
+                }
+                else{
+                    setName("")
+                    setError("")
+                    setSuccess(true)
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+            })
     }
 
     const AddCategoryForm=()=>{
         return(
             <form>
                 <div className='form-group'>
-                    <p className='lead'>Add the category</p>
+                    <p className='lead my-1'>Add the category</p>
                     <input type="text" className='form-control my-3'
-                    autoFocus required placeholder="For eg: Summer"
+                    autoFocus required onChange={handleChange} value={name} placeholder="For eg: Summer"
                     />
-                    <div className='btn btn-success my-2'>Add Category</div>
+                    <button className='btn btn-success my-2' onClick={handleClick}>Add Category</button>
                 </div>
             </form>
         )

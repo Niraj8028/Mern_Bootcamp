@@ -6,13 +6,13 @@ export const createCategory=(userId,token,category)=>{
         headers:{
             Accept:"application/json",
             "Content-Type":"application/json",
-            Authorization: `Bearer {token}`
+            Authorization: `Bearer ${token}`
         },
         body:JSON.stringify(category)
 
     })
     .then(response=>{
-        return response.json()
+        return response.json();
     })
     .catch(err=>console.log(err))
 }
