@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Navigate, Outlet} from "react-router-dom";
 import { isAuthenticated } from "./index";
-import Signin from "../../user/Signin";
+
 
 
 const PrivateRoute=()=>{

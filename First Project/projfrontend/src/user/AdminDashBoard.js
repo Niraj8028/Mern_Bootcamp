@@ -1,11 +1,12 @@
 import React from 'react'
+import Base from '../core/Base';
 
 function AdminDashBoard() {
   return (
-    <div>
-      This is a AdminDashBoard
-    </div>
+    <Base>
+    This is a AdminDashBoard
+    </Base>
   )
 }
 
-export default AdminDashBoard
+export default AdminDashBoard;

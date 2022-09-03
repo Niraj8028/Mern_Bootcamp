@@ -14,7 +14,7 @@ import Signin from './user/Signin';
 import PrivateRoute from './auth/helper/PrivateRoutes';
 import UserDashBoard from './user/UserDashBoard';
 import AdminDashBoard from './user/AdminDashBoard';
-import AdminRoutes from './auth/helper/AdminRoutes'
+import AdminRoutes from './auth/helper/AdminRoutes';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

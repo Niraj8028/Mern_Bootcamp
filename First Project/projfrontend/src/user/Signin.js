@@ -60,10 +60,10 @@ const Signin=()=> {
   const performRedirect=()=>{
     if(didRedirect){
       if(user && user.role===1){
-        return <p>Redirect to admin dashboard</p>
+        return <Navigate to="/admin/dashboard"/>
       }
       else{
-        return <p>redirect to user dashboard</p>
+        return <Navigate to="/user/dashboard"/>
       }
 
     }

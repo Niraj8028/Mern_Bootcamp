@@ -1,10 +1,11 @@
 import React from 'react'
+import Base from '../core/Base';
 
 function UserDashBoard() {
   return (
-    <div>
-      This is a UserDashBoard
-    </div>
+    <Base>
+    This is a UserDashBoard
+    </Base>
   )
 }
 
