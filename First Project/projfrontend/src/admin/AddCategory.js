@@ -47,6 +47,22 @@ function AddCategory() {
             })
     }
 
+    const successMsg=()=>{
+        if(success){
+            return(
+                <h4 className='text-success'>Category was created successfully</h4>
+            )
+        }
+        
+    }
+    const errorMsg=()=>{
+        if(error){
+            return(<h4 className='text-danger'>Failed to create category</h4>)
+        }
+        
+    }
+
+
     const AddCategoryForm=()=>{
         return(
             <form>
@@ -64,7 +80,12 @@ function AddCategory() {
   return (
     <Base title='Add New Categoty Here' description='Add a new category for T-shirts' className='container bg-secondary p-4'>
         <div className='row bg-white rounded'>
-            <div className='col-md-8 offset-md-2'>{AddCategoryForm()} {goBack()}</div>
+            <div className='col-md-8 offset-md-2'>
+                {errorMsg()}
+                {successMsg()}
+                {AddCategoryForm()}
+                {goBack()}
+            </div>
         </div>
     </Base>
   )
