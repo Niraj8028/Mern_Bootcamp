@@ -14,8 +14,10 @@ function AddCategory() {
     // console.log("id is:" ,user._id);
     // console.log("token is:" ,user.name);
     const goBack=()=>{
+        
         return(
             <div className='mt-3'>
+            
                 <Link to="/admin/dashboard" className='btn btn-sm btn-secondary mb-3'>Go back</Link>
             </div>
         )
@@ -49,6 +51,7 @@ function AddCategory() {
 
     const successMsg=()=>{
         if(success){
+            console.log("success");
             return(
                 <h4 className='text-success'>Category was created successfully</h4>
             )
@@ -57,6 +60,8 @@ function AddCategory() {
     }
     const errorMsg=()=>{
         if(error){
+            console.log("error");
+            
             return(<h4 className='text-danger'>Failed to create category</h4>)
         }
         
