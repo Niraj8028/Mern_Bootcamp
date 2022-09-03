@@ -30,8 +30,27 @@ function AdminDashBoard() {
   }
   const adminRightSide=()=>{
     return(
-      <div>
-      </div>
+      <div className="card mb-4">
+               <h4 className="card-header">
+                   Admin Information
+               </h4>
+               <ul className="list-group">
+                   <li className="list-group-item">
+                       <h5><span className="badge bg-success  mr-2">
+                           Name :</span> {name}</h5>
+                       
+                   </li>
+                   <li className="list-group-item">
+                       <h5><span className="badge bg-success  mr-2">
+                           Email :</span> {email}</h5>
+                       
+                   </li>
+                   <li className="list-group-item">
+                   <h5><span class="badge bg-danger">Admin Property</span></h5>
+                       
+                   </li>
+               </ul>
+           </div>
     )
   }
 
