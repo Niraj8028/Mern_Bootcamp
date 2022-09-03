@@ -17,12 +17,50 @@ export const createCategory=(userId,token,category)=>{
     .catch(err=>console.log(err))
 }
 
+//can cause error
+export const getCategory=(categoryId,userId,token)=>{
+    return fetch(`${API}/category/${categoryId}/${userId}`,{
+        method:"get",
+        Authorization:`Bearer ${token}`
+    })
+    .then(response=>{
+        return response.json();
+    })
+    .catch(err=>console.log(err))
+}
+//
+
+
 export const getAllCategories=()=>{
     return fetch(`${API}/category/categories`,{
-        method:"GET",
+        method:"GET"
+    })
+    .then(response=>{
+        return response.json();
+    })
+    .catch(err=>console.log(err))
+}
+
+export const updateCategory=(categoryId,userId,category,token)=>{
+    return fetch(`${API}/category/${categoryId}/${userId}`,{
+        method:"PUT",
         headers:{
-            Accept:"application/json",
-            
+            Accept:"application/json",         
+            Authorization:`Bearer ${token}`
+        },
+        body:category    
+    })
+    .then(response=>{
+        return response.json();
+    })
+    .catch(err=>console.log(err))
+}
+export const removeCategory=(userId,categoryId,token)=>{
+    return fetch(`${API}/category/${categoryId}/${userId}`,{
+        method:"DELETE",
+        headers:{
+            Accept: "application/json",
+            Authorization:`Bearer ${token}`
         }
     })
     .then(response=>{
@@ -30,6 +68,7 @@ export const getAllCategories=()=>{
     })
     .catch(err=>console.log(err))
 }
+
 
 export const createProduct=(userId,token,product)=>{
     return fetch(`${API}/product/create/${userId}`,{
