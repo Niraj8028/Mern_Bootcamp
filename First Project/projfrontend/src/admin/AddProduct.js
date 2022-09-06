@@ -1,6 +1,7 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import Base from '../core/Base'
+import { getAllCategories } from './helper/adminapicall';
 
 
 function AddProduct() {
@@ -8,18 +9,39 @@ function AddProduct() {
         name:"",
         description:"",
         price:"",
-        stock:""
+        stock:"",
+        photo:"",
+        categories:[],
+        category:"",
+        loading:false,
+        error:false,
+        createProduct:"",
+        getRedirect:false,
+        formdata:""
 
     })
-const {name,description,price,stock}=values;
+const {name,description,price,stock,categories,category,loading,error,createProduct,getRedirect,formdata}=values;
 
-  
+    const preloadData=()=>{
+        getAllCategories().then(data=>{
+            if(data.error){
+                setvalues({...values,error:data.error})
+            }
+            else{
+                setvalues({...values,categories:data, formdata: new FormData()})
+                
+            }
+        })
+    }
     const handleChange=()=>{
         //
     }
     const onSubmit=()=>{
         //
     }
+    useEffect(() => {
+      preloadData(); 
+    }, [])
     
 
     const createProductForm = () => (
