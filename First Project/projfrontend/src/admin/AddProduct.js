@@ -5,7 +5,7 @@ import Base from '../core/Base'
 function AddProduct() {
     const [values, setvalues] = useState({
         name:"",
-        
+
     })
 
     const createProductForm = () => (
@@ -81,8 +81,8 @@ function AddProduct() {
       );
 
   return (
-    <Base title='Add Product' >
-
+    <Base title='Add a Product here!' description='Welcome to product creation section' className='container bg-info p-4' >
+    <h1>Add a product</h1>
     </Base>
   )
 }
