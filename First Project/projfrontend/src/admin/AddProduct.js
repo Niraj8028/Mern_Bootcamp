@@ -2,11 +2,11 @@ import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import { isAuthenticated } from '../auth/helper';
 import Base from '../core/Base'
-import { getAllCategories } from './helper/adminapicall';
+import { getAllCategories,createProduct } from './helper/adminapicall';
 
 
 function AddProduct() {
-    const [values, setvalues] = useState({
+    const [values, setValues] = useState({
         name:"",
         description:"",
         price:"",
@@ -16,38 +16,64 @@ function AddProduct() {
         category:"",
         loading:false,
         error:false,
-        createProduct:"",
+        createdProduct:"",
         getRedirect:false,
-        formdata:""
+        formData:""
 
     })
-const {name,description,price,stock,categories,category,loading,error,createProduct,getRedirect,formdata}=values;
+const {name,description,price,stock,categories,category,loading,error,createdProduct,getRedirect,formData}=values;
 
     const {user,token}=isAuthenticated();
 
     const preloadData=()=>{
         getAllCategories().then(data=>{
             if(data.error){
-                setvalues({...values,error:data.error})
+                setValues({...values,error:data.error})
             }
             else{
                 
-                setvalues({...values,categories:data, formdata: new FormData()})
-                
+                setValues({...values,categories:data, formData: new FormData()})
+                console.log("CATE:" ,categories);
             }
         })
     }
-    const handleChange=(name)=event=>{
-        const value=name==="photo"?event.target.file[0]:event.target.value;
-        formdata.set(name,value);
-        setvalues({...values,[name]:value})
-    }
-    const onSubmit=()=>{
-        //
-    }
     useEffect(() => {
-        preloadData(); 
-    }, [])
+      preloadData(); 
+  }, [])
+
+    const handleChange = name => event => {
+      const value = name === "photo" ? event.target.files[0] : event.target.value; 
+      formData.set(name, value);
+      setValues({...values, [name]:value});
+  };
+    const onSubmit=(event)=>{
+        event.preventDefault();
+        setValues({...values,error:"",loading:true})
+        createProduct(user._id,token,formData).then(data=>{
+          if(data.error){
+            setValues({...values,error:data.error})
+          }
+          else{
+            setValues({
+              ...values,
+              name:"",
+              description:"",
+              price:"",
+              stock:"",
+              createdProduct:data.name,
+              loading:false
+            })
+          }
+        })
+    }
+
+    
+
+    const successMsg=()=>(
+      <div className='alert alert-info mt-3' style={{display:createdProduct?"":"none"}}>
+        <h4 >{createdProduct} was created succesfully</h4>
+       </div>
+    )
     
 
     const createProductForm = () => (
@@ -139,6 +165,7 @@ const {name,description,price,stock,categories,category,loading,error,createProd
         <Link to="/admin/dashboard" className='btn btn-md btn-dark mb-3'>Admin Home</Link>
         <div className='row text-white bg-dark rounded'>
             <div className='col-md-8 offset-md-2'>
+                {successMsg()}
                 {createProductForm()}
             </div>
         </div>
