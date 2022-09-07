@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom';
+import { isAuthenticated } from '../auth/helper';
 import Base from '../core/Base'
 import { getAllCategories } from './helper/adminapicall';
 
@@ -22,25 +23,30 @@ function AddProduct() {
     })
 const {name,description,price,stock,categories,category,loading,error,createProduct,getRedirect,formdata}=values;
 
+    const {user,token}=isAuthenticated();
+
     const preloadData=()=>{
         getAllCategories().then(data=>{
             if(data.error){
                 setvalues({...values,error:data.error})
             }
             else{
+                
                 setvalues({...values,categories:data, formdata: new FormData()})
                 
             }
         })
     }
-    const handleChange=()=>{
-        //
+    const handleChange=(name)=event=>{
+        const value=name==="photo"?event.target.file[0]:event.target.value;
+        formdata.set(name,value);
+        setvalues({...values,[name]:value})
     }
     const onSubmit=()=>{
         //
     }
     useEffect(() => {
-      preloadData(); 
+        preloadData(); 
     }, [])
     
 
@@ -85,6 +91,23 @@ const {name,description,price,stock,categories,category,loading,error,createProd
               value={price}
             />
           </div>
+          <div className="form-group mb-2">
+        <select
+          onChange={handleChange("category")}
+          className="form-control"
+          placeholder="Category"
+        >
+          <option>Select</option>
+          {categories &&
+            categories.map((cate, index) => (
+                
+              <option key={index} value={cate._id}>
+                {cate.name}
+              </option>
+              
+            ))}
+        </select>
+      </div>
         
        
           <div className="form-group mb-2">
@@ -96,7 +119,8 @@ const {name,description,price,stock,categories,category,loading,error,createProd
               value={stock}
             />
           </div>
-    
+          
+
           <button
             type="submit"
             onClick={onSubmit}
@@ -105,6 +129,8 @@ const {name,description,price,stock,categories,category,loading,error,createProd
             Create Product
           </button>
         </form>
+        
+                
       );
 
   return (

@@ -17,7 +17,7 @@ router.param("userId",getUserById)
 
 router.post("/category/create/:userId",isSignedIn,isAuthenticated,isAdmin,createCategory)
 router.get("/category/:categoryId",getCategory)
-router.get("/category/categories",getAllCategories)
+router.get("/categories",getAllCategories)
 
 router.put("/category/:categoryId/:userId",isSignedIn,isAuthenticated,isAdmin,updateCategory)
 router.delete("/category/:categoryId/:userId",isSignedIn,isAuthenticated,isAdmin,removeCategory);

@@ -32,7 +32,7 @@ export const getCategory=(categoryId,userId,token)=>{
 
 
 export const getAllCategories=()=>{
-    return fetch(`${API}/category/categories`,{
+    return fetch(`${API}/categories`,{
         method:"GET"
     })
     .then(response=>{

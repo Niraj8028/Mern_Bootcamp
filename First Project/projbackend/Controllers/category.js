@@ -29,7 +29,7 @@ exports.getCategory=(req,res)=>{
 }
 
 exports.getAllCategories=(req,res)=>{
-    Category.find().exec=((err,items)=>{1
+    Category.find().exec=((err,items)=>{
         if(err){
             return res.json({
                 error:"No categories found in database"
