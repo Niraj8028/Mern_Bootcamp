@@ -74,7 +74,10 @@ const {name,description,price,stock,categories,category,loading,error,createdPro
         <h4 >{createdProduct} was created succesfully</h4>
        </div>
     )
-    
+    const errorMsg=()=>{
+      <div className='alert alert-danger mt-3' style={{display:error?"":"none"}}>
+      <h4>Something went wrong..</h4></div>
+    }
 
     const createProductForm = () => (
         <form>
@@ -166,6 +169,7 @@ const {name,description,price,stock,categories,category,loading,error,createdPro
         <div className='row text-white bg-dark rounded'>
             <div className='col-md-8 offset-md-2'>
                 {successMsg()}
+                {errorMsg()}
                 {createProductForm()}
             </div>
         </div>
