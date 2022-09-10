@@ -16,9 +16,9 @@ function AddProduct() {
         category:"",
         loading:false,
         error:false,
-        createdProduct:"",
         getRedirect:false,
-        formData:""
+        formData:new FormData()
+
 
     })
 const {name,description,price,stock,categories,category,loading,error,createdProduct,getRedirect,formData}=values;
@@ -32,7 +32,7 @@ const {name,description,price,stock,categories,category,loading,error,createdPro
             }
             else{
                 
-                setValues({...values,categories:data, formData: new FormData()})
+                setValues({...values,categories:data, formData})
                 console.log("CATE:" ,categories);
             }
         })
@@ -41,11 +41,12 @@ const {name,description,price,stock,categories,category,loading,error,createdPro
       preloadData(); 
   }, [])
 
-    const handleChange = name => event => {
-      const value = name === "photo" ? event.target.files[0] : event.target.value; 
-      formData.set(name, value);
-      setValues({...values, [name]:value});
+  const handleChange = name => event => {
+    const value = name === "photo" ? event.target.files[0] : event.target.value; 
+    formData.set(name, value);
+    setValues({...values, [name]:value});
   };
+
     const onSubmit=(event)=>{
         event.preventDefault();
         setValues({...values,error:"",loading:true})

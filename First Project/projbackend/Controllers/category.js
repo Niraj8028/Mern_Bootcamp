@@ -29,13 +29,15 @@ exports.getCategory=(req,res)=>{
 }
 
 exports.getAllCategories=(req,res)=>{
-    Category.find().exec=((err,items)=>{
+    Category.find().exec((err,items)=>{
         if(err){
+            console.log(err)
             return res.json({
                 error:"No categories found in database"
             });
         };
         res.json(items);
+        console.log("items:",items)
     });
 };
 

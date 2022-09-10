@@ -2,7 +2,7 @@ import React from 'react'
 import Base from '../core/Base'
 
 
-function manageCategories() {
+function ManageCategories() {
   return (
     <Base>
       <h1>Assignment</h1>
@@ -10,4 +10,4 @@ function manageCategories() {
   )
 }
 
-export default manageCategories
+export default ManageCategories
