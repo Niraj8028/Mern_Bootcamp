@@ -2,6 +2,8 @@ import React from "react";
 import { API } from "../Backend";
 import "../styles.css"
 import Base from "./Base";
+import Card from "./Card";
+
 
 
 function Home() {
@@ -10,7 +12,8 @@ function Home() {
     <Base>
       <div className="row ">
         <div className="col-4">
-        <button className="btn btn-success">Click here</button></div>
+        <Card/>
+        </div>
         <div className="col-4">
         <button className="btn btn-success">Click here</button></div>
         <div className="col-4">
