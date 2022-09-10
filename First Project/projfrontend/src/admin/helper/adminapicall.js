@@ -129,7 +129,7 @@ export const deleteProduct=(userId,productId, token)=>{
 
 export const getAllProducts=()=>{
     return  fetch(`${API}/products`,{
-        method:"GET",
+        method:"GET"
        
     })
     .then(response => {
