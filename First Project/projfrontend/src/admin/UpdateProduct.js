@@ -33,6 +33,7 @@ const {name,description,price,stock,categories,category,loading,error,createdPro
                 setValues({ ...values, error: data.error });
             }
             else{
+                getCategories();
                 setValues({ 
                     ...values,
                     name : data.name,
@@ -42,9 +43,23 @@ const {name,description,price,stock,categories,category,loading,error,createdPro
                     stock: data.stock,
                     formData: new FormData()
                  });
+                 
             }
         })
     }
+    const getCategories=()=>{
+        getAllCategories().then(data=>{
+            if(data.error){
+                setValues({...values,error:data.error})
+            }
+            else{
+                setValues({
+                    categories:data
+                })
+            }
+        })
+    }
+
     useEffect(() => {
         preload(productId);
       }, []);
@@ -58,7 +73,7 @@ const {name,description,price,stock,categories,category,loading,error,createdPro
     const onSubmit=(event)=>{
         event.preventDefault();
         setValues({...values,error:"",loading:true})
-        updateProduct(user._id,token,formData).then(data=>{
+        updateProduct(productId,user._id,token,formData).then(data=>{
           if(data.error){
             setValues({...values,error:data.error})
           }
@@ -164,7 +179,7 @@ const {name,description,price,stock,categories,category,loading,error,createdPro
             onClick={onSubmit}
             className="text-white btn btn-outline-success mb-1"
           >
-            Create Product
+            Update Product
           </button>
         </form>
         

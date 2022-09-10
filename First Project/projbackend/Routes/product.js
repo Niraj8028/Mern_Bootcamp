@@ -18,7 +18,7 @@ router.get("/product/create/", (req,res)=>{
 })
 router.delete("/product/:productId/:userId",isSignedIn,isAuthenticated,isAdmin,removeProduct);
 
-router.put("/product/:productId",isSignedIn,isAuthenticated,isAdmin,updateProduct);
+router.put("product/:productId",isSignedIn,isAuthenticated,isAdmin,updateProduct);
 router.get("/products",getAllProducts)
 
 module.exports=router;
