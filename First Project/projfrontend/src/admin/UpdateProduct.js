@@ -1,11 +1,13 @@
 import React,{useState,useEffect} from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { isAuthenticated } from '../auth/helper';
 import Base from '../core/Base'
 import { getAllCategories,getProduct,updateProduct } from './helper/adminapicall';
 
 
 function UpdateProduct() {
+    const {productId}=useParams()
+    console.log("productId",productId);
     const [values, setValues] = useState({
         name:"",
         description:"",
@@ -25,23 +27,27 @@ const {name,description,price,stock,categories,category,loading,error,createdPro
 
     const {user,token}=isAuthenticated();
 
-    const preloadData=()=>{
-        getProduct().then(data=>{
+    const preload=(productId)=>{
+        getProduct(productId).then(data=>{
             if(data.error){
-                console.log(data.error)
+                setValues({ ...values, error: data.error });
             }
-            setValues({
-                name:data.name,
-                description:data.description,
-                price:data.price,
-                stock:data.stock,
-
-            })
+            else{
+                setValues({ 
+                    ...values,
+                    name : data.name,
+                    description: data.description,
+                    price: data.price,
+                    category: data.category_id,
+                    stock: data.stock,
+                    formData: new FormData()
+                 });
+            }
         })
     }
     useEffect(() => {
-      preloadData(); 
-  }, [])
+        preload(productId);
+      }, []);
 
   const handleChange = name => event => {
     const value = name === "photo" ? event.target.files[0] : event.target.value; 
