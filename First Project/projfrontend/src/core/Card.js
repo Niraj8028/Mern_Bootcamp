@@ -1,7 +1,31 @@
 import React from 'react'
 import Image from './helper/Image'
 
-function Card({product}) {
+function Card({product, addToCart=true, removeFromCart=false}) {
+
+    const showAddToCart=(addToCart)=>{
+        return (
+            addToCart && (<button
+            onClick={() => {}}
+            className="btn btn-block btn-outline-success mt-2 mb-2"
+          >
+            Add to Cart
+          </button>)
+        )
+    }
+
+    const showRemoveFromCart=(removeFromCart)=>{
+        return(
+            removeFromCart && (<button
+                onClick={() => {}}
+                className="btn btn-block btn-outline-danger mt-2 mb-2"
+              >
+                Remove from cart
+              </button>)
+        )
+
+    }
+
   return (
         <div className='text-center'>
           <div className="card text-white bg-dark border border-info ">
@@ -16,20 +40,10 @@ function Card({product}) {
               <p className="btn btn-success rounded  btn-sm px-4">$ 5</p>
               <div className="row">
                 <div className="col-12">
-                  <button
-                    onClick={() => {}}
-                    className="btn btn-block btn-outline-success mt-2 mb-2"
-                  >
-                    Add to Cart
-                  </button>
+                  {showAddToCart(addToCart)}
                 </div>
                 <div className="col-12">
-                  <button
-                    onClick={() => {}}
-                    className="btn btn-block btn-outline-danger mt-2 mb-2"
-                  >
-                    Remove from cart
-                  </button>
+                  {showRemoveFromCart(removeFromCart)}
                 </div>
               </div>
             </div>
