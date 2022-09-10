@@ -18,7 +18,9 @@ import AdminRoutes from './auth/helper/AdminRoutes';
 import AddCategory from './admin/AddCategory';
 import ManageCategories from './admin/manageCategories';
 
+
 import AddProduct from './admin/AddProduct';
+import ManageProducts from './admin/ManageProducts';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -37,7 +39,7 @@ root.render(
          <Route element={<AdminRoutes/>}>
           <Route path="/admin/dashboard" element={<AdminDashBoard/>}/>
           <Route path="/admin/create/category" element={<AddCategory/>}/>
-          <Route path="/admin/categories" element={<ManageCategories/>}/>
+          <Route path="/admin/products" element={<ManageProducts/>}/>
           <Route path="admin/create/product" element={<AddProduct/>}/>
 
         </Route>
