@@ -17,9 +17,9 @@ router.get("/product/photo/:productId", photo);
 router.post("/product/create/:userId",isSignedIn,isAuthenticated,isAdmin,createProduct)
 
 
-router.delete("/product/:productId/:userId",isSignedIn,isAuthenticated,isAdmin,removeProduct);
+router.delete("/products/:productId/:userId",isSignedIn,isAuthenticated,isAdmin,removeProduct);
 
-router.put("product/:productId",isSignedIn,isAuthenticated,isAdmin,updateProduct);
+router.put("/product/:productId",isSignedIn,isAuthenticated,isAdmin,updateProduct);
 router.get("/products",getAllProducts)
 
 module.exports=router;

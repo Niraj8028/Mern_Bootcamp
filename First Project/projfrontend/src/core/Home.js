@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import { getAllProducts } from "../admin/helper/adminapicall";
+
 
 import "../styles.css"
 import Base from "./Base";

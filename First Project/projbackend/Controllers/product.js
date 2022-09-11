@@ -2,20 +2,21 @@ const Product=require("../Models/product")
 const formidable=require('formidable')
 const _=require("lodash")
 const fs=require("fs")
-const category = require("../Models/category")
+
 
 exports.getProductById=(req,res,next,id)=>{
     Product.findById(id)
-    .populate("category")
+    .populate("Category")
     .exec((err,product)=>{
         if(err){
+            console.log("err:",err)
             return res.status(400).json({
                 error:"no product was found"
             })
         }
         req.product=product;
-        res.json(product);
-        next()
+        
+        next();
     })
 }
 
@@ -65,6 +66,7 @@ exports.createProduct=(req,res)=>{
 
 exports.getProduct=(req,res)=>{
     req.product.photo=undefined;
+    // console.log("response:",req.product)
     return res.json(req.product);
 
 }
@@ -72,13 +74,14 @@ exports.getProduct=(req,res)=>{
 exports.photo=(req,res,next)=>{
      if(req.product.photo.data){
         res.set("Content-Type",req.product.photo.contentType);
-        return res.json(req.product.photo.data);
+        return res.json("response:",req.product.photo.data);
      }
      next();
 }
 
 exports.removeProduct=(req,res)=>{
     let product=req.product
+    console.log("product is",product)
     product.remove((err,deletedProduct)=>{
         if(err){
             return res.status(400).json({
@@ -88,6 +91,7 @@ exports.removeProduct=(req,res)=>{
         res.json({
             message:"Deletion was success",
             deletedProduct
+            
         })
     })
 }
@@ -134,7 +138,7 @@ exports.getAllProducts = (req, res) => {
 
   Product.find()
     .select("-photo")
-    .populate("category")
+    .populate("Category")
     .sort([[sortBy, "asc"]])
     .limit(limit)
     .exec((err, products) => {

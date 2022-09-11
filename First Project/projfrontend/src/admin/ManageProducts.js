@@ -8,7 +8,7 @@ import { deleteProduct, getAllProducts } from './helper/adminapicall'
 
 
 function ManageProducts() {
-    const [products, setproducts] = useState([])
+    const [products, setProducts] = useState([])
     const {user,token} =isAuthenticated();
 
     const preload=()=>{
@@ -17,7 +17,7 @@ function ManageProducts() {
                 console.log(data.error);
             }
             else{
-                setproducts(data)
+                setProducts(data)
             }
         })
     }
@@ -36,6 +36,7 @@ function ManageProducts() {
       preload(); 
     }, [])
     
+    
   return (
     <Base title="Welcome admin" description="Manage products here">
       <h2 className="mb-4">All products:</h2>
@@ -45,15 +46,17 @@ function ManageProducts() {
       <div className="row">
         <div className="col-12">
           <h2 className="text-center text-white my-3">Total 3 products</h2>
+
             {products.map((product,index)=>{
+              return(
                 <div className="row text-center mb-2 ">
                     <div className="col-4">
-                    <h3 key={index} className="text-white text-left">{product.name}</h3>
+                    <h3  className="text-white text-left">{product.name}</h3>
                     </div>
                 <div className="col-4">
                 <Link
                     className="btn btn-success"
-                    to={`/admin/product/update/productId`}
+                    to={`/admin/product/update/:productId`}
                 >
                 <span className="">Update</span>
               </Link>
@@ -66,7 +69,7 @@ function ManageProducts() {
               </button>
             </div>
           </div>
-            })}
+  )})}
           
         </div>
       </div>
