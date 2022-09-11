@@ -48,18 +48,19 @@ function ManageProducts() {
           <h2 className="text-center text-white my-3">Total 3 products</h2>
 
             {products.map((product,index)=>{
+              console.log("product_id",product._id);
               return(
-                <div className="row text-center mb-2 ">
+                <div key={index} className="row text-center mb-2 ">
                     <div className="col-4">
                     <h3  className="text-white text-left">{product.name}</h3>
                     </div>
                 <div className="col-4">
                 <Link
                     className="btn btn-success"
-                    to={`/admin/product/update/:productId`}
-                >
-                <span className="">Update</span>
-              </Link>
+                    to={`/admin/product/update/${product._id}`}
+                  >
+                    <span className="">Update</span>
+                  </Link>
             </div>
             <div className="col-4">
               <button onClick={() => {

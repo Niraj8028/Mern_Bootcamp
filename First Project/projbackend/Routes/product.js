@@ -19,7 +19,7 @@ router.post("/product/create/:userId",isSignedIn,isAuthenticated,isAdmin,createP
 
 router.delete("/products/:productId/:userId",isSignedIn,isAuthenticated,isAdmin,removeProduct);
 
-router.put("/product/:productId",isSignedIn,isAuthenticated,isAdmin,updateProduct);
+router.put("/product/:productId/:userId",isSignedIn,isAuthenticated,isAdmin,updateProduct);
 router.get("/products",getAllProducts)
 
 module.exports=router;

@@ -29,13 +29,16 @@ function Card({product, addToCart=true, removeFromCart=false}) {
   return (
         <div className='text-center'>
           <div className="card text-white bg-dark border border-info ">
-            <div className="card-header lead">A photo from pexels</div>
+            <div className="card-header lead"></div>
             <div className="card-body">
               <div className="rounded border border-success p-2">
                 <Image product={product}/>
               </div>
               <p className="lead bg-success font-weight-normal text-wrap">
-                this photo looks great
+                {product.name}
+              </p>
+              <p className="lead bg-success font-weight-normal text-wrap">
+                {product.description}
               </p>
               <p className="btn btn-success rounded  btn-sm px-4">$ 5</p>
               <div className="row">

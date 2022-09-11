@@ -7,8 +7,8 @@ import { getAllCategories,getProduct,updateProduct } from './helper/adminapicall
 
 function UpdateProduct() {
     const {productId}=useParams()
-    console.log("productId",productId);
-    const [values, setValues] = useState({
+    
+    const [values, setValues] = useState({  
         name:"",
         description:"",
         price:"",
@@ -26,6 +26,22 @@ function UpdateProduct() {
 const {name,description,price,stock,categories,category,loading,error,createdProduct,getRedirect,formData}=values;
 
     const {user,token}=isAuthenticated();
+
+    const getCategories=()=>{
+      getAllCategories().then(data=>{
+          if(data.error){
+              setValues({...values,error:data.error})
+          }
+          else{
+              setValues({
+                  categories:data,
+                  formData: new FormData()
+              })
+          }
+      })
+  }
+
+  
 
     const preload=(productId)=>{
         getProduct(productId).then(data=>{
@@ -47,32 +63,16 @@ const {name,description,price,stock,categories,category,loading,error,createdPro
             }
         })
     }
-    const getCategories=()=>{
-        getAllCategories().then(data=>{
-            if(data.error){
-                setValues({...values,error:data.error})
-            }
-            else{
-                setValues({
-                    categories:data
-                })
-            }
-        })
-    }
-
+    
     useEffect(() => {
-        preload(productId);
-      }, []);
-
-  const handleChange = name => event => {
-    const value = name === "photo" ? event.target.files[0] : event.target.value; 
-    formData.set(name, value);
-    setValues({...values, [name]:value});
-  };
+      preload(productId);
+    }, []);
+  
 
     const onSubmit=(event)=>{
         event.preventDefault();
         setValues({...values,error:"",loading:true})
+
         updateProduct(productId,user._id,token,formData).then(data=>{
           if(data.error){
             setValues({...values,error:data.error})
@@ -91,6 +91,11 @@ const {name,description,price,stock,categories,category,loading,error,createdPro
         })
     }
 
+    const handleChange = name => event => {
+      const value = name === "photo" ? event.target.files[0] : event.target.value; 
+      formData.set(name, value);
+      setValues({...values, [name]:value});
+    };
     
 
     const successMsg=()=>(
