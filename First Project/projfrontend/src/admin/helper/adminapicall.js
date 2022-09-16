@@ -55,6 +55,7 @@ export const updateCategory=(categoryId,userId,category,token)=>{
     })
     .catch(err=>console.log(err))
 }
+
 export const removeCategory=(userId,categoryId,token)=>{
     return fetch(`${API}/category/${categoryId}/${userId}`,{
         method:"DELETE",
