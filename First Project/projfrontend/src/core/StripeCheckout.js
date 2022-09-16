@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react'
+import { Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/helper'
 import { loadCart } from './helper/CartHelper'
 
@@ -26,9 +27,19 @@ function StripeCheckout({products,
       return amount;
     }
 
+    const showCheckout=()=>{
+      return isAuthenticated()?(
+        <button className='btn btn-success'>Pay with Stripe</button>
+      ):(<Link to="/signin">
+          <button className='btn btn-warning'>Signin</button>
+        </Link>)
+    }
+
+
   return (
     <div>
       <h3 className='text-white'>Checkout amount is {getTotal()}</h3>
+      {showCheckout()}
     </div>
   )
 }
