@@ -5,41 +5,50 @@ import { loadCart } from './helper/CartHelper'
 
 
 
-function Cart() {
-  const [products, setProducts] = useState([])
-  const [reload, setReload] = useState(false)
+const Cart = () => {
+  const [products, setProducts] = useState([]);
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
-    setProducts(loadCart())  
-  }, [reload])
+    setProducts(loadCart());
+  }, [reload]);
   
- const loadAllProducts=()=>{
-  return(
-    <div>
-      <h2>Load All Products</h2>
-      {products.map((product,index)=>(
-        <Card 
-          key={index}
-          product={product}
-          removeFromCart={true}
-          addtoCart={false}
-          reload={reload}
-          setReload={setReload}
-        />
-  ))}
-    </div>
-  )
- }
-
+  let array = Array.from(products);
+  const loadAllProducts =() => {
+    return (
+      <div>
+        <h2>This section is to load products</h2>
+        {array.map((product, index) =>{return(
+          <Card
+            key={index}
+            product={product}
+            removeFromCart={true}
+            addtoCart={false}
+            setReload={setReload}
+            reload={reload}
+          />
+        )})}
+      </div>
+    );
+  };
+  const loadCheckout = () => {
+    return (
+      <div>
+        <h2>This section for checkout</h2>
+      </div>
+    );
+  };
 
   return (
     <Base title="Cart Page" description="Ready to checkout">
-      <div className='row text-center'>
-        <div className='col-6'>{loadAllProducts()}</div>
-        <div className='col-6'>Load checkout</div>
+      <div className="row text-center">
+        <div className="col-6">{loadAllProducts()}</div>
+        <div className="col-6">
+          {loadCheckout()}
+        </div>
       </div>
     </Base>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
