@@ -1,4 +1,4 @@
-import { type } from "@testing-library/user-event/dist/type";
+
 
 export const loadcart=()=>{
     if(typeof window !== undefined){
@@ -23,4 +23,11 @@ export const removeFromCart=(productId)=>{
     }
     return cart;
 
+}
+
+export const emptyCart=()=>{
+    if(typeof window!== undefined){
+        localStorage.removeItem("cart");
+        next();
+    }
 }

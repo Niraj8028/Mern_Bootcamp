@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from 'react'
 import Card from './Card'
 import Base from './Base'
+import { loadcart } from './helper/CartHelper'
+
 
 
 function Cart() {
@@ -8,10 +10,8 @@ function Cart() {
   const [reload, setReload] = useState(false)
 
   useEffect(() => {
-    
-    //TODO
-    
-  }, [])
+    setProducts(loadcart())  
+  }, [reload])
   
  const loadAllProducts=()=>{
   return(
