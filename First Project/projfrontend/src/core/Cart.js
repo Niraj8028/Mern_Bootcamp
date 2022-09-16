@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import Card from './Card'
+import Base from './Base'
 
 
 function Cart() {
@@ -22,7 +23,8 @@ function Cart() {
           product={product}
           removeFromCart={true}
           addToCart={false}
-          
+          reload={reload}
+          setReload={setReload}
         />
       })}
     </div>
@@ -31,9 +33,12 @@ function Cart() {
 
 
   return (
-    <div>
-      <h3>Cart Page</h3>
-    </div>
+    <Base title="Cart Page" description="Ready to checkout">
+      <div className='row text-center'>
+        <div className='col-6'>{loadAllProducts()}</div>
+        <div className='col-6'></div>
+      </div>
+    </Base>
   )
 }
 

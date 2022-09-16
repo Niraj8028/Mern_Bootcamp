@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom'
 import { addItemToCart } from './helper/AddinCart'
 import Image from './helper/Image'
 
-function Card({product, addToCart=true, removeFromCart=false}) {
+function Card({product, addToCart=true, removeFromCart=false, reload=false, set}) {
 
     const [redirect, setRedirect] = useState(false)
     const [count, setCount] = useState(product.count);
