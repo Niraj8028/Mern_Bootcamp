@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Card from './Card'
 import Base from './Base'
-import { loadcart } from './helper/CartHelper'
+import { loadCart } from './helper/CartHelper'
 
 
 
@@ -10,14 +10,14 @@ function Cart() {
   const [reload, setReload] = useState(false)
 
   useEffect(() => {
-    setProducts(loadcart())  
+    setProducts(loadCart())  
   }, [reload])
   
  const loadAllProducts=()=>{
   return(
     <div>
       <h2>Load All Products</h2>
-      {products.map((product,index)=>{
+      {products.map((product,index)=>(
         <Card 
           key={index}
           product={product}
@@ -26,7 +26,7 @@ function Cart() {
           reload={reload}
           setReload={setReload}
         />
-      })}
+  ))}
     </div>
   )
  }
@@ -36,7 +36,7 @@ function Cart() {
     <Base title="Cart Page" description="Ready to checkout">
       <div className='row text-center'>
         <div className='col-6'>{loadAllProducts()}</div>
-        <div className='col-6'></div>
+        <div className='col-6'>Load checkout</div>
       </div>
     </Base>
   )

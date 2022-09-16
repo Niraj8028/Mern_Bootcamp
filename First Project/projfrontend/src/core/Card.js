@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import { Navigate } from 'react-router-dom'
-import { addItemToCart} from './helper/AddinCart'
+import { addItemToCart,removeItemFromCart } from './helper/CartHelper'
+
 import Image from './helper/Image'
 
-function Card({product, addtoCart=true, removeFromCart=false, reload=false, set}) {
+function Card({product, addtoCart=true, removeFromCart=false, reload=undefined, setReload=(f)=>f}) {
 
-    const [redirect, setRedirect] = useState(false)
+    const [redirect, setRedirect] = useState(false);
     const [count, setCount] = useState(product.count);
 
     const cardTitle  = product ? product.name: "A photo from Pexels"
@@ -13,9 +14,9 @@ function Card({product, addtoCart=true, removeFromCart=false, reload=false, set}
     const cardPrice  = product ? product.price: "Default"
 
     const addInCart=()=>{
-        addItemToCart(product,()=>{
+        addItemToCart(product,()=>
           setRedirect(true)
-        })
+        )
     }
 
     const getRedirect=(redirect)=>{
@@ -39,7 +40,10 @@ function Card({product, addtoCart=true, removeFromCart=false, reload=false, set}
     const showRemoveFromCart=(removeFromCart)=>{
         return(
             removeFromCart && (<button
-                onClick={() => {removeFromCart(product._id)}}
+              onClick={() => {removeItemFromCart(product._id);
+                setReload(!reload);
+                
+                }}
                 className="btn btn-block btn-outline-danger mt-2 mb-2"
               >
                 Remove from cart
@@ -52,7 +56,7 @@ function Card({product, addtoCart=true, removeFromCart=false, reload=false, set}
           <div className="card text-white bg-dark border border-info ">
             <div className="card-header lead"></div>
             <div className="card-body">
-            {getRedirect(redirect)}
+              {getRedirect(redirect)}
 
               <div className="rounded border border-success p-2">
                 <Image product={product}/>
