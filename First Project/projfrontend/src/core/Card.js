@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import { Navigate } from 'react-router-dom'
-import { addItemToCart } from './helper/AddinCart'
+import { addItemToCart} from './helper/AddinCart'
 import Image from './helper/Image'
 
-function Card({product, addToCart=true, removeFromCart=false, reload=false, set}) {
+function Card({product, addtoCart=true, removeFromCart=false, reload=false, set}) {
 
     const [redirect, setRedirect] = useState(false)
     const [count, setCount] = useState(product.count);
@@ -24,10 +24,10 @@ function Card({product, addToCart=true, removeFromCart=false, reload=false, set}
       }
     } 
 
-    const showAddToCart=(addToCart)=>{
+    const showAddToCart=(addtoCart)=>{
         return (
             
-            addToCart && (
+            addtoCart && (
               <button
               onClick={addInCart}
               className="btn btn-block btn-outline-success mt-2 mb-2">
@@ -39,7 +39,7 @@ function Card({product, addToCart=true, removeFromCart=false, reload=false, set}
     const showRemoveFromCart=(removeFromCart)=>{
         return(
             removeFromCart && (<button
-                onClick={() => {}}
+                onClick={() => {removeFromCart(product._id)}}
                 className="btn btn-block btn-outline-danger mt-2 mb-2"
               >
                 Remove from cart
@@ -66,7 +66,7 @@ function Card({product, addToCart=true, removeFromCart=false, reload=false, set}
               <p className="btn btn-success rounded  btn-sm px-4">{cardPrice}</p>
               <div className="row">
                 <div className="col-12">
-                  {showAddToCart(addToCart)}
+                  {showAddToCart(addtoCart)}
                 </div>
                 <div className="col-12">
                   {showRemoveFromCart(removeFromCart)}

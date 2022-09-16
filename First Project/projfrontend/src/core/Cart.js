@@ -22,7 +22,7 @@ function Cart() {
           key={index}
           product={product}
           removeFromCart={true}
-          addToCart={false}
+          addtoCart={false}
           reload={reload}
           setReload={setReload}
         />

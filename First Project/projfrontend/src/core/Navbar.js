@@ -26,7 +26,7 @@ function Navbar() {
                 </Link>
             </li> 
             <li className="nav-item">
-                <Link style={  currentTab("/")} className='nav-link' to="">
+                <Link style={  currentTab("/cart")} className='nav-link' to="/cart">
                     Cart
                 </Link>
             </li> 
