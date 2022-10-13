@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/helper'
 import { loadCart } from './helper/CartHelper'
 import StripeCheckoutButton from 'react-stripe-checkout'
+import { API } from '../Backend'
 
 function StripeCheckout({products,
                         setReload=f=>f,
@@ -28,7 +29,22 @@ function StripeCheckout({products,
       return amount;
     }
     const makePayment=(token)=>{
-      // 
+      const body={
+        token,
+        products
+      }
+      const headers={
+        "Content-Type":"Application/json"
+      }
+      return fetch(`{API}/stripePayment`,{
+        method:"POST",
+        headers,
+        body:JSON.stringify(body)
+      }).then(response=>{
+        console.log(response);
+      }).catch(error=>{
+        console.log(error);
+      })
     }
 
     const showCheckout=()=>{
@@ -47,8 +63,6 @@ function StripeCheckout({products,
           <button className='btn btn-warning'>Signin</button>
         </Link>)
     }
-
-
   return (
     <div>
       <h3 className='text-white'>Checkout amount is {getTotal()}</h3>
@@ -57,5 +71,4 @@ function StripeCheckout({products,
     </div>
   )
 }
-
 export default StripeCheckout
